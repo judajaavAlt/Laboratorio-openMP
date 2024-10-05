@@ -9,31 +9,14 @@ int main() {
     int min = 100000; 
     int avg;
 
-    //rellena el array
-    #pragma omp parallel for num_threads(100)
+    
+    #pragma omp parallel for reduction(max:max) \
+        reduction(min:min) reduction(+:avg) num_threads(100)
         for (i = 0; i < 100; i++)
         {    
-        Array[i] = rand() % 10000;
-        }
-
-    //busca el maximo
-    #pragma omp parallel for reduction(max:max) num_threads(100)
-        for (i = 0; i < 100; i++)
-        {
+            Array[i] = rand() % 10000;
             max = Array[i];
-        }
-
-    //busca el minimo
-    #pragma omp parallel for reduction(min:min) num_threads(100)
-        for (i = 0; i < 100; i++)
-        {
             min = Array[i];
-        }
-
-    //busca el promedio
-    #pragma omp parallel for reduction(+:avg) num_threads(100)
-        for (i = 0; i < 100; i++)
-        {
             avg = Array[i];
         }
     avg /= 100;
