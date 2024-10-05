@@ -10,10 +10,10 @@ RUN pip install jupyter
 # Make port 8888 available to the world outside this container
 EXPOSE 8888
 
-COPY work /app/work
+COPY tarea-openmp /app/tarea-openmp
 
 # Define environment variable
 ENV NAME World
 
 # Run Jupyter Notebook when the container launches
-CMD ["jupyter", "notebook", "/app/work/Labs/labs.ipynb", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
+CMD ["jupyter", "notebook", "/app", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
